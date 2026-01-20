@@ -4,15 +4,14 @@ const withPWA = withPWAInit({
   dest: "public",
   disable: process.env.NODE_ENV === "development",
   register: true,
-  scope: "/",
-  sw: "service-worker.js",
+  skipWaiting: true,
 });
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  experimental: {
-    turbopack: {},
-  },
+  reactStrictMode: true,
 };
+
+export default withPWA(nextConfig);
 
 export default withPWA(nextConfig);
