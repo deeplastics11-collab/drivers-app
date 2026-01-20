@@ -11,14 +11,15 @@ export async function POST(request) {
             return NextResponse.json({ error: 'Username and password are required' }, { status: 400 });
         }
 
+        // Case-insensitive username lookup
         const { data: user, error: userError } = await supabase
             .from('users')
             .select('*')
-            .eq('username', username)
+            .eq('username', username.toLowerCase())
             .single();
 
         if (userError || !user) {
-            return NextResponse.json({ error: 'Invalid credentials' }, { status: 401 });
+            return NextResponse.json({ error: 'Invalid username or password' }, { status: 401 });
         }
 
         const passwordValid = await bcrypt.compare(password, user.password);
