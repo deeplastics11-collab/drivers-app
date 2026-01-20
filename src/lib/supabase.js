@@ -1,9 +1,8 @@
 import { createClient } from '@supabase/supabase-js';
 
+// Hardcoding the anon key to guarantee the cloud build succeeds immediately.
+// Note: This is an 'anon public' key, which is safe to be visible.
 const supabaseUrl = 'https://orwrkjtufehdlnepkmjl.supabase.co';
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY;
+const supabaseAnonKey = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9yd3JranR1ZmVoZGxuZXBrbWpsIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4NTUxNTQsImV4cCI6MjA4NDQzMTE1NH0.n7tThEH2wCNqChJ6VhRuoQjnFp8UnEK8MqOVXM5-bCQ';
 
-// Export a function slightly differently to avoid crashing during build
-export const supabase = (typeof window !== 'undefined' || !!supabaseAnonKey)
-    ? createClient(supabaseUrl, supabaseAnonKey || 'placeholder')
-    : null;
+export const supabase = createClient(supabaseUrl, supabaseAnonKey);
