@@ -10,10 +10,6 @@ const withPWA = withPWAInit({
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
-  // This tells Next.js to use Webpack and avoid the Turbopack error
-  webpack: (config) => {
-    return config;
-  },
 };
 
 export default withPWA(nextConfig);
