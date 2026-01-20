@@ -2,7 +2,7 @@ import withPWAInit from "@ducanh2912/next-pwa";
 
 const withPWA = withPWAInit({
   dest: "public",
-  disable: false,
+  disable: process.env.NODE_ENV === "development",
   register: true,
   scope: "/",
   sw: "service-worker.js",
@@ -10,7 +10,9 @@ const withPWA = withPWAInit({
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  /* config options here */
+  experimental: {
+    turbopack: {},
+  },
 };
 
 export default withPWA(nextConfig);
