@@ -16,5 +16,14 @@ export default defineConfig({
   build: {
     outDir: 'dist',
     emptyOutDir: true,
+    chunkSizeWarningLimit: 2000,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          vendor: ['react', 'react-dom'],
+          firebase: ['firebase/app', 'firebase/auth', 'firebase/firestore'],
+        }
+      }
+    }
   },
 });
