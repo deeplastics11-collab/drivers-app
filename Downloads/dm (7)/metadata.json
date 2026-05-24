@@ -1,0 +1,12 @@
+{
+  "name": "DeeMech",
+  "author": "Deon86Van03Vuuren21",
+  "email": "deeplastics11@gmail.com",
+  "copyright": "© 2025 Deon86Van03Vuuren21. All Rights Reserved.",
+  "description": "DeeMech: The ultimate high-performance Smart Assistant for professional mechanics. Get real-time advice, OBD-II code lookups, visual part identification, torque specs, and more.",
+  "requestFramePermissions": [
+    "camera",
+    "microphone",
+    "geolocation"
+  ]
+}

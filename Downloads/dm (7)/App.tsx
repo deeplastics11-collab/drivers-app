@@ -35,7 +35,7 @@ import { onAuthStateChanged } from 'firebase/auth';
 import { Camera } from '@capacitor/camera';
 import { Geolocation } from '@capacitor/geolocation';
 import { Capacitor } from '@capacitor/core';
-import { CapacitorUpdater } from 'capacitor-updater';
+import { CapacitorUpdater } from '@capgo/capacitor-updater';
 
 const App: React.FC = () => {
   const [activeView, setActiveView] = useState<AppView>(AppView.DASHBOARD);
@@ -116,7 +116,7 @@ const App: React.FC = () => {
       case AppView.DASHBOARD:
         return <Dashboard onAction={navigateTo} onBack={handleBack} isPremium={isPremium} />;
       case AppView.CHAT:
-        return <ChatInterface onBack={handleBack} />;
+        return <ChatInterface onBack={handleBack} isPremium={isPremium} onUpgrade={() => navigateTo(AppView.PREMIUM_UPGRADE)} />;
       case AppView.LIVE_VOICE:
         return <LiveVoice onBack={handleBack} />;
       case AppView.DIAGNOSTICS:

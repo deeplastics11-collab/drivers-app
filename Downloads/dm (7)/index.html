@@ -1,0 +1,76 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="theme-color" content="#020617">
+    <meta name="author" content="Deon86Van03Vuuren21 (deeplastics11@gmail.com)">
+    <!-- 
+      DEVELOPER: Deon86Van03Vuuren21
+      CONTACT: deeplastics11@gmail.com
+      COPYRIGHT: © 2025 Deon86Van03Vuuren21. All Rights Reserved.
+    -->
+    <title>DeeMech Pro</title>
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="https://cdn-icons-png.flaticon.com/512/1085/1085813.png">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="application-name" content="DeeMech Pro">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <div id="root" class="app-shell">
+        <div id="loading-screen" style="display: flex; flex-direction: column; height: 100%; width: 100%; align-items: center; justify-content: center; background: #020617; position: fixed; top: 0; left: 0; z-index: 9999;">
+            <div style="width: 80px; height: 80px; background: #f59e0b; border-radius: 16px; display: flex; align-items: center; justify-content: center; box-shadow: 0 0 30px rgba(59, 130, 246, 0.8); margin-bottom: 24px; border: 2px solid #fbbf24;">
+                <span style="color: #020617; font-family: sans-serif; font-size: 24px; font-weight: 900; letter-spacing: -0.05em;">DFMS</span>
+            </div>
+            <div style="color: #f59e0b; font-family: sans-serif; font-size: 10px; text-transform: uppercase; letter-spacing: 0.4em; font-weight: 900; opacity: 0.8;">
+                DEEMECH PRO [V1.6]
+            </div>
+        </div>
+    </div>
+    <script>
+        var isLocalhost = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1';
+        // Force reload if stuck on old version for too long
+        setTimeout(function() {
+            if (isLocalhost) return;
+            var loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen && loadingScreen.innerText.includes('V1.')) {
+                console.warn("DeeMech: Version mismatch (V1.x) detected, forcing major upgrade reset...");
+                clearSWAndReload();
+            }
+        }, 1500);
+
+        window.onerror = function(msg, url, line, col, error) {
+            var loadingScreen = document.getElementById('loading-screen');
+            if (loadingScreen) {
+                loadingScreen.innerHTML = '<div style="padding: 20px; text-align: center; background: #020617; height: 100vh; width: 100vw; display: flex; flex-direction: column; align-items: center; justify-content: center;">' +
+                    '<h1 style="color: #ef4444; font-size: 18px; font-family: sans-serif;">BOOT ERROR</h1>' +
+                    '<p style="color: #cbd5e1; font-size: 12px; margin-top: 10px; font-family: monospace;">' + msg + '</p>' +
+                    '<button onclick="window.location.reload()" style="margin-top: 20px; background: #f59e0b; color: #020617; border: none; padding: 12px 24px; border-radius: 8px; font-weight: bold; cursor: pointer;">RETRY BOOT</button>' +
+                    '<button onclick="clearSWAndReload()" style="margin-top: 10px; background: transparent; color: #f59e0b; border: 1px solid #f59e0b; padding: 8px 16px; border-radius: 8px; font-size: 10px;">FORCE HARD UPGRADE (V2.0)</button>' +
+                    '</div>';
+            }
+            return false;
+        };
+
+        function clearSWAndReload() {
+            if ('serviceWorker' in navigator) {
+                navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                    for(let registration of registrations) {
+                        registration.unregister();
+                    }
+                    localStorage.clear(); // Clear all potential corrupt local storage
+                    window.location.reload(true);
+                });
+            } else {
+                localStorage.clear();
+                window.location.reload(true);
+            }
+        }
+    </script>
+    <script type="module" src="./index.tsx"></script>
+</body>
+</html>
